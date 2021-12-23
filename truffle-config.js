@@ -1,3 +1,4 @@
+require("dotenv").config();
 /**
  * Use this file to configure your truffle project. It's seeded with some
  * common settings for different networks and features like migrations,
@@ -19,8 +20,8 @@
  */
 
 const HDWalletProvider = require('@truffle/hdwallet-provider');
-const priKey = 'b8ed812a73ca25905a534c4afc5b0f5ba2b387727cf73e4700fe843dcb7971b6';
-//const priKey = '236fec8c4a283e8a13824aaaf153c64a9c67716e5b4425a98f57fe2c8e34e130';
+const priKey = process.env.PRI_KEY;
+
 // const infuraKey = "fj4jll3k.....";
 //
 // const fs = require('fs');
@@ -45,11 +46,11 @@ module.exports = {
     // options below to some value.
     //
     development: {
-     host: "127.0.0.1",     // Localhost (default: none)
-     port: 8545,            // Standard Ethereum port (default: none)
-     network_id: "*", 
-     networkCheckTimeout: 1000000000,
-     timeoutBlocks: 200000, 
+      host: "127.0.0.1",     // Localhost (default: none)
+      port: 8545,            // Standard Ethereum port (default: none)
+      network_id: "*",
+      networkCheckTimeout: 1000000000,
+      timeoutBlocks: 200000,
       // Any network (default: none)
     },
     // Another network with more advanced options...
@@ -72,7 +73,7 @@ module.exports = {
       skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     },
     rinkeby: {
-      provider: () => new HDWalletProvider(priKey, `https://rinkeby.infura.io/v3/33b80616d03249baa458695ca6f348b4`),
+      provider: () => new HDWalletProvider(priKey, process.env.RINKEBY_URL),
       network_id: 4,       // Ropsten's id
       gas: 5500000,        // Ropsten has a lower block limit than mainnet
       //confirmations: 2,    // # of confs to wait between deployments. (default: 0)
